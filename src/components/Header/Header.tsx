@@ -9,7 +9,7 @@ export default function Header() {
       <div className="font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-red-300 to-orange-600">
         <Link href="/">
           <a className="block w-fit">
-            <p>tRPC</p>
+            <p>Workout Planner</p>
           </a>
         </Link>
       </div>
