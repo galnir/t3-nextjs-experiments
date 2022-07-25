@@ -4,7 +4,7 @@ import { z } from "zod";
 import { authedProcedure } from "../utils";
 
 export const workoutsRouter = t.router({
-  submit: t.procedure
+  create: t.procedure
     .input(
       z.object({
         userId: z.string(),
