@@ -16,11 +16,16 @@ const NewExerciseForm = () => {
       return router.push("../api/auth/signin");
     }
 
+    const { name, description } = e.target as typeof e.target & {
+      name: { value: string };
+      description: { value: string };
+    };
+
     mutate(
       {
         userId: session.user.id,
-        name: "hi",
-        description: "world",
+        name: name.value,
+        description: description.value,
       },
       {
         onSuccess: (data) => {
