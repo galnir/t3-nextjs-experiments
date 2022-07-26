@@ -24,6 +24,7 @@ const WorkoutPreviews = () => {
         <WorkoutPreview
           name={workout.name}
           description={workout.description}
+          id={workout.id}
           key={workout.id}
         />
       ))}

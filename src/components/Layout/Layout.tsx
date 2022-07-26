@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Head>
       <div className="container h-screen px-4 py-2">
         <Header />
-        <main>{children}</main>
+        <main className="p-52">{children}</main>
       </div>
     </>
   );

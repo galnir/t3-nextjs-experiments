@@ -74,9 +74,10 @@ model Workout {
 
 model Exercise {
     id        String   @id @default(cuid())
-    name      String
+    name      String   @unique
     sets      Int
     reps      Int
     createdAt DateTime @default(now())
-    workout   Workout  @relation(fields: [id], references: [id], onDelete: Cascade)
+    workoutId String
+    workout   Workout  @relation(fields: [workoutId], references: [id], onDelete: Cascade)
 }
