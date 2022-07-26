@@ -74,7 +74,7 @@ model Workout {
 
 model Exercise {
     id        String   @id @default(cuid())
-    name      String   @unique
+    name      String
     sets      Int
     reps      Int
     createdAt DateTime @default(now())

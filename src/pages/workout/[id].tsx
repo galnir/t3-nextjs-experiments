@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef } from "react";
 import { trpc } from "../../utils/trpc";
 
 const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const { data, isLoading: isLoadingWorkout } =
     trpc.proxy.workout.getById.useQuery({
       id,
@@ -35,9 +37,10 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
       },
       {
         onSuccess: (data) => {
-          console.log("data is", data);
           if (!data.exercise) return;
           utils.invalidateQueries("workout.getById");
+          if (!formRef || !formRef.current) return;
+          formRef.current.reset();
         },
       }
     );
@@ -47,7 +50,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
     <div className="w-full">
       <h1>{data?.workout.name}</h1>
 
-      <form onSubmit={handleSubmit} className="flex gap-3">
+      <form onSubmit={handleSubmit} className="flex gap-3" ref={formRef}>
         <div className="flex gap-2 items-center">
           <label htmlFor="name">Exercise</label>
           <input
@@ -82,6 +85,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         </div>
         <button
           type="submit"
+          disabled={isLoadingExercise}
           className="block p-1 px-2 bg-orange-500 rounded-sm hover:bg-orange-400"
         >
           {isLoadingExercise ? "Adding..." : "Add"}
