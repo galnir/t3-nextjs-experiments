@@ -26,7 +26,24 @@ export const workoutsRouter = t.router({
         workout,
       };
     }),
+  delete: authedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id } = input;
+      const workout = await ctx.prisma.workout.delete({
+        where: {
+          id,
+        },
+      });
 
+      return {
+        workout,
+      };
+    }),
   getAll: authedProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {

@@ -1,9 +1,13 @@
 import type { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
+import DeleteWorkoutButton from "../../components/DeleteWorkoutButton";
 import { trpc } from "../../utils/trpc";
 
 const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
+  const utils = trpc.useContext();
+  const { data: session } = useSession();
   const formRef = useRef<HTMLFormElement>(null);
 
   const { data, isLoading: isLoadingWorkout } =
@@ -11,7 +15,6 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
       id,
     });
 
-  const utils = trpc.useContext();
   const { mutate, isLoading: isLoadingExercise } =
     trpc.proxy.exercise.create.useMutation();
 
@@ -47,15 +50,25 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
   }
 
   return (
-    <div className="w-full">
-      <h1>{data?.workout.name}</h1>
+    <div className="w-full py-16 flex flex-col justify-center items-center gap-10">
+      <div className="flex gap-4">
+        <h1 className="w-fit text-5xl text-rose-600">{data?.workout.name}</h1>
+        <h4 className="self-end">by {data.workout.user.name}</h4>
+        {data.workout.user.id === session?.user?.id && (
+          <DeleteWorkoutButton id={data.workout.id} />
+        )}
+      </div>
 
-      <form onSubmit={handleSubmit} className="flex gap-3" ref={formRef}>
+      <form
+        onSubmit={handleSubmit}
+        className="border border-gray-400 p-4 flex gap-3"
+        ref={formRef}
+      >
         <div className="flex gap-2 items-center">
           <label htmlFor="name">Exercise</label>
           <input
             name="name"
-            className="p-1 rounded-sm text-orange-600"
+            className="p-1 rounded-sm text-orange-600 w-36"
             minLength={3}
             maxLength={80}
             required
@@ -64,7 +77,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         <div className="flex gap-2 items-center">
           <label htmlFor="sets">Sets</label>
           <input
-            className="p-1 rounded-sm text-orange-600"
+            className="p-1 rounded-sm text-orange-600 w-16"
             name="sets"
             type={"number"}
             min={1}
@@ -75,7 +88,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         <div className="flex gap-2 items-center">
           <label htmlFor="reps">Reps</label>
           <input
-            className="p-1 rounded-sm text-orange-600"
+            className="p-1 rounded-sm text-orange-600 w-16"
             name="reps"
             type={"number"}
             min={1}
@@ -92,9 +105,11 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         </button>
       </form>
 
-      {data?.workout.exercises.map((exercise) => (
-        <p key={exercise.id}>{exercise.name}</p>
-      ))}
+      <div>
+        {data?.workout.exercises.map((exercise) => (
+          <p key={exercise.id}>{exercise.name}</p>
+        ))}
+      </div>
     </div>
   );
 };
