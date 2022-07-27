@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { trpc } from "../../utils/trpc";
 import type { Exercise } from "@prisma/client";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Exercise({ exercise }: { exercise: Exercise }) {
   const [name, setName] = useState(exercise.name);
@@ -52,47 +53,54 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
   }
 
   return (
-    <div className="flex gap-2 text-gray-700">
-      <div className="flex gap-2">
-        <input
-          className="px-1 disabled:bg-red-400 border-none"
-          placeholder="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          disabled={!edit}
-        />
-        <input
-          className="px-1 disabled:bg-red-400 border-none"
-          placeholder="sets"
-          type={"number"}
-          value={sets}
-          onChange={(e) => setSets(+e.target.value)}
-          disabled={!edit}
-        />
-        <input
-          className="px-1 disabled:bg-red-400 border-none"
-          placeholder="reps"
-          type={"number"}
-          value={reps}
-          onChange={(e) => setReps(+e.target.value)}
-          disabled={!edit}
-        />
-      </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="flex gap-2 text-gray-700"
+      >
+        <div className="flex gap-2">
+          <input
+            className="px-1 disabled:bg-red-400 border-none"
+            placeholder="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            disabled={!edit}
+          />
+          <input
+            className="px-1 disabled:bg-red-400 border-none"
+            placeholder="sets"
+            type={"number"}
+            value={sets}
+            onChange={(e) => setSets(+e.target.value)}
+            disabled={!edit}
+          />
+          <input
+            className="px-1 disabled:bg-red-400 border-none"
+            placeholder="reps"
+            type={"number"}
+            value={reps}
+            onChange={(e) => setReps(+e.target.value)}
+            disabled={!edit}
+          />
+        </div>
 
-      <button
-        onClick={handleEdit}
-        disabled={isLoadingEdit}
-        className="block p-1 px-2 w-16 bg-orange-500 rounded-sm hover:bg-orange-400"
-      >
-        {edit ? (isLoadingEdit ? "Saving" : "Save") : "Edit"}
-      </button>
-      <button
-        onClick={handleDelete}
-        className="block p-1 px-2 rounded-sm bg-red-600 text-white"
-        disabled={isLoadingDelete}
-      >
-        {isLoadingDelete ? "Deleting..." : "Delete"}
-      </button>
-    </div>
+        <button
+          onClick={handleEdit}
+          disabled={isLoadingEdit}
+          className="block p-1 px-2 w-16 bg-orange-500 rounded-sm hover:bg-orange-400"
+        >
+          {edit ? (isLoadingEdit ? "Saving" : "Save") : "Edit"}
+        </button>
+        <button
+          onClick={handleDelete}
+          className="block p-1 px-2 rounded-sm bg-red-600 text-white"
+          disabled={isLoadingDelete}
+        >
+          {isLoadingDelete ? "Deleting..." : "Delete"}
+        </button>
+      </motion.div>
+    </AnimatePresence>
   );
 }
