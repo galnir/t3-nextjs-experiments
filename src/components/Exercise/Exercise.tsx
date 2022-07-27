@@ -8,12 +8,16 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
   const [reps, setReps] = useState(exercise.reps);
   const [edit, setEdit] = useState(false);
 
-  const { mutate } = trpc.proxy.exercise.edit.useMutation();
+  const { mutate: editExercise, isLoading: isLoadingEdit } =
+    trpc.proxy.exercise.edit.useMutation();
+  const { mutate: deleteExercise, isLoading: isLoadingDelete } =
+    trpc.proxy.exercise.delete.useMutation();
+
   const utils = trpc.useContext();
 
   function handleEdit() {
     if (edit) {
-      mutate(
+      editExercise(
         {
           id: exercise.id,
           name,
@@ -34,18 +38,31 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
     }
   }
 
+  function handleDelete() {
+    deleteExercise(
+      {
+        id: exercise.id,
+      },
+      {
+        onSuccess: () => {
+          utils.invalidateQueries("workout.getById");
+        },
+      }
+    );
+  }
+
   return (
     <div className="flex gap-2 text-gray-700">
       <div className="flex gap-2">
         <input
-          className="px-1"
+          className="px-1 disabled:bg-red-400 border-none"
           placeholder="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           disabled={!edit}
         />
         <input
-          className="px-1"
+          className="px-1 disabled:bg-red-400 border-none"
           placeholder="sets"
           type={"number"}
           value={sets}
@@ -53,7 +70,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
           disabled={!edit}
         />
         <input
-          className="px-1"
+          className="px-1 disabled:bg-red-400 border-none"
           placeholder="reps"
           type={"number"}
           value={reps}
@@ -64,12 +81,17 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
 
       <button
         onClick={handleEdit}
-        className="block p-1 px-2 w-14 bg-orange-500 rounded-sm hover:bg-orange-400"
+        disabled={isLoadingEdit}
+        className="block p-1 px-2 w-16 bg-orange-500 rounded-sm hover:bg-orange-400"
       >
-        {edit ? "Save" : "Edit"}
+        {edit ? (isLoadingEdit ? "Saving" : "Save") : "Edit"}
       </button>
-      <button className="block p-1 px-2 rounded-sm bg-red-600 text-white">
-        Delete Exercise
+      <button
+        onClick={handleDelete}
+        className="block p-1 px-2 rounded-sm bg-red-600 text-white"
+        disabled={isLoadingDelete}
+      >
+        {isLoadingDelete ? "Deleting..." : "Delete"}
       </button>
     </div>
   );

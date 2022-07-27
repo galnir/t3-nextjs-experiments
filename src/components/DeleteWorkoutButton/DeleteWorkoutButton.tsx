@@ -28,6 +28,7 @@ const DeleteWorkoutButton: React.FC<{ id: string; userId: string }> = ({
       <button
         className="block p-1 px-2 rounded-sm bg-red-600 text-white"
         onClick={handleDelete}
+        disabled={isLoading}
       >
         {isLoading ? "Deleting..." : "Delete Workout"}
       </button>

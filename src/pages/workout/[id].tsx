@@ -56,10 +56,12 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         <h1 className="w-fit text-5xl text-rose-600">{data?.workout.name}</h1>
         <h4 className="self-end">by {data.workout.user.name}</h4>
         {data.workout.user.id === session?.user?.id && (
-          <DeleteWorkoutButton
-            id={data.workout.id}
-            userId={data.workout.user.id}
-          />
+          <div className="self-end">
+            <DeleteWorkoutButton
+              id={data.workout.id}
+              userId={data.workout.user.id}
+            />
+          </div>
         )}
       </div>
 

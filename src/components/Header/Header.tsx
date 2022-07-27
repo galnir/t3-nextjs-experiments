@@ -22,6 +22,12 @@ export default function Header() {
               <Link href="api/auth/signout">
                 <a className="block">Sign Out</a>
               </Link>
+              <span>-</span>
+              <div className="px-2 py-1 w-fit bg-green-600 text-white -mt-1 hover:bg-green-500">
+                <Link href="/workout/create">
+                  <a>Create Workout</a>
+                </Link>
+              </div>
             </div>
           ) : (
             <div className="p-2 rounded-md bg-amber-600 hover:bg-amber-500">
