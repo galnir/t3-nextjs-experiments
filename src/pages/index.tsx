@@ -1,6 +1,7 @@
-import type { NextPage } from "next";
+import type { GetServerSidePropsContext, NextPage } from "next";
 import { useSession } from "next-auth/react";
 import WorkoutPreview from "../components/WorkoutPreview";
+import { getServerSession } from "../shared/get-server-session";
 import { trpc } from "../utils/trpc";
 
 const WorkoutPreviews = () => {
@@ -38,7 +39,7 @@ const Home: NextPage = () => {
   if (!session || !session.user?.id) {
     return (
       <div>
-        <h1>Sign in to see your workouts</h1>
+        <h1>Sign in to view and create workouts</h1>
       </div>
     );
   }
@@ -50,6 +51,14 @@ const Home: NextPage = () => {
       </div>
     </>
   );
+};
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  return {
+    props: {
+      session: await getServerSession(ctx),
+    },
+  };
 };
 
 export default Home;
