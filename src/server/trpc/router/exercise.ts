@@ -29,6 +29,52 @@ export const exerciseRouter = t.router({
         exercise,
       };
     }),
+  delete: authedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id } = input;
+
+      const exercise = await ctx.prisma.exercise.delete({
+        where: {
+          id,
+        },
+      });
+
+      return {
+        exercise,
+      };
+    }),
+  edit: authedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        name: z.string().nullable(),
+        sets: z.number().min(1).max(100).nullable(),
+        reps: z.number().min(1).max(100).nullable(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id, name, sets, reps } = input;
+
+      const exercise = await ctx.prisma.exercise.update({
+        where: {
+          id,
+        },
+        data: {
+          name: name ?? undefined,
+          sets: sets ?? undefined,
+          reps: reps ?? undefined,
+        },
+      });
+
+      return {
+        exercise,
+      };
+    }),
   getAll: authedProcedure
     .input(
       z.object({

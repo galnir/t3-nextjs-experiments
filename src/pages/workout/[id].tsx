@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
 import DeleteWorkoutButton from "../../components/DeleteWorkoutButton";
+import Exercise from "../../components/Exercise";
 import { trpc } from "../../utils/trpc";
 
 const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
@@ -55,7 +56,10 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         <h1 className="w-fit text-5xl text-rose-600">{data?.workout.name}</h1>
         <h4 className="self-end">by {data.workout.user.name}</h4>
         {data.workout.user.id === session?.user?.id && (
-          <DeleteWorkoutButton id={data.workout.id} />
+          <DeleteWorkoutButton
+            id={data.workout.id}
+            userId={data.workout.user.id}
+          />
         )}
       </div>
 
@@ -105,9 +109,9 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         </button>
       </form>
 
-      <div>
+      <div className="flex flex-col gap-4">
         {data?.workout.exercises.map((exercise) => (
-          <p key={exercise.id}>{exercise.name}</p>
+          <Exercise key={exercise.id} exercise={exercise} />
         ))}
       </div>
     </div>

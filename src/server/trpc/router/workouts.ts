@@ -2,6 +2,7 @@ import { t } from "../utils";
 import { z } from "zod";
 
 import { authedProcedure } from "../utils";
+import { TRPCError } from "@trpc/server";
 
 export const workoutsRouter = t.router({
   create: t.procedure
@@ -30,10 +31,17 @@ export const workoutsRouter = t.router({
     .input(
       z.object({
         id: z.string(),
+        userId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
       const { id } = input;
+      if (ctx.session.user.id !== input.userId) {
+        throw new TRPCError({
+          message: "NOT YOUR WORKOUTS",
+          code: "UNAUTHORIZED",
+        });
+      }
       const workout = await ctx.prisma.workout.delete({
         where: {
           id,
@@ -47,6 +55,12 @@ export const workoutsRouter = t.router({
   getAll: authedProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {
+      if (ctx.session.user.id !== input.userId) {
+        throw new TRPCError({
+          message: "NOT YOUR WORKOUTS",
+          code: "UNAUTHORIZED",
+        });
+      }
       const workouts = await ctx.prisma.workout.findMany({
         where: {
           userId: input.userId,
