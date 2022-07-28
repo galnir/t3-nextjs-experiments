@@ -67,10 +67,10 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
 
       <form
         onSubmit={handleSubmit}
-        className="-ml-5 py-3 flex gap-5 justify-center w-5/6"
+        className="-ml-5 py-3 flex gap-5 justify-center items-end w-5/6"
         ref={formRef}
       >
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-col gap-2 items-center">
           <label htmlFor="name">Exercise:</label>
           <input
             name="name"
@@ -80,7 +80,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
             required
           />
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-col gap-2 items-center">
           <label htmlFor="sets">Sets:</label>
           <input
             className="p-1 rounded-sm text-orange-600 w-16"
@@ -91,7 +91,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
             required
           />
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-col gap-2 items-center">
           <label htmlFor="reps">Reps:</label>
           <input
             className="p-1 rounded-sm text-orange-600 w-16"
@@ -105,7 +105,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         <button
           type="submit"
           disabled={isLoadingExercise}
-          className="block p-1 px-2 text-gray-700 bg-orange-500 rounded-sm hover:bg-orange-400"
+          className="block p-1 px-2 h-fit text-gray-700 bg-orange-500 rounded-sm hover:bg-orange-400"
         >
           {isLoadingExercise ? "Adding..." : "Add"}
         </button>
