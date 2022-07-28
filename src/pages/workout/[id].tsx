@@ -51,8 +51,8 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
   }
 
   return (
-    <div className="w-full py-16 flex flex-col justify-center items-center gap-10">
-      <div className="flex gap-4">
+    <div className="mx-auto w-4/6 py-16 flex flex-col justify-center items-center gap-10">
+      <div className="flex gap-4 pb-2 border-b-2 w-5/6 justify-center">
         <h1 className="w-fit text-5xl text-rose-600">{data?.workout.name}</h1>
         <h4 className="self-end">by {data.workout.user.name}</h4>
         {data.workout.user.id === session?.user?.id && (
@@ -67,11 +67,11 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
 
       <form
         onSubmit={handleSubmit}
-        className="border border-gray-400 p-4 flex gap-3"
+        className="-ml-5 py-3 flex gap-5 justify-center w-5/6"
         ref={formRef}
       >
-        <div className="flex gap-2 items-center">
-          <label htmlFor="name">Exercise</label>
+        <div className="flex gap-4 items-center">
+          <label htmlFor="name">Exercise:</label>
           <input
             name="name"
             className="p-1 rounded-sm text-orange-600 w-36"
@@ -80,8 +80,8 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
             required
           />
         </div>
-        <div className="flex gap-2 items-center">
-          <label htmlFor="sets">Sets</label>
+        <div className="flex gap-4 items-center">
+          <label htmlFor="sets">Sets:</label>
           <input
             className="p-1 rounded-sm text-orange-600 w-16"
             name="sets"
@@ -91,8 +91,8 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
             required
           />
         </div>
-        <div className="flex gap-2 items-center">
-          <label htmlFor="reps">Reps</label>
+        <div className="flex gap-4 items-center">
+          <label htmlFor="reps">Reps:</label>
           <input
             className="p-1 rounded-sm text-orange-600 w-16"
             name="reps"
@@ -105,13 +105,13 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         <button
           type="submit"
           disabled={isLoadingExercise}
-          className="block p-1 px-2 bg-orange-500 rounded-sm hover:bg-orange-400"
+          className="block p-1 px-2 text-gray-700 bg-orange-500 rounded-sm hover:bg-orange-400"
         >
           {isLoadingExercise ? "Adding..." : "Add"}
         </button>
       </form>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 w-full items-center">
         {data?.workout.exercises.map((exercise) => (
           <Exercise key={exercise.id} exercise={exercise} />
         ))}
