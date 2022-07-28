@@ -20,15 +20,18 @@ const WorkoutPreviews = () => {
   }
 
   return (
-    <div>
-      {workouts.data?.workouts.map((workout) => (
-        <WorkoutPreview
-          name={workout.name}
-          description={workout.description}
-          id={workout.id}
-          key={workout.id}
-        />
-      ))}
+    <div className="mt-8 ml-1">
+      <h1 className="text-2xl">Your workouts:</h1>
+      <div className="mt-4 flex gap-5">
+        {workouts.data?.workouts.map((workout) => (
+          <WorkoutPreview
+            name={workout.name}
+            description={workout.description}
+            id={workout.id}
+            key={workout.id}
+          />
+        ))}
+      </div>
     </div>
   );
 };
