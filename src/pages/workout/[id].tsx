@@ -11,13 +11,20 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
   const { data: session } = useSession();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const { data, isLoading: isLoadingWorkout } =
-    trpc.proxy.workout.getById.useQuery({
-      id,
-    });
+  const {
+    data,
+    isLoading: isLoadingWorkout,
+    error,
+  } = trpc.proxy.workout.getById.useQuery({
+    id,
+  });
 
   const { mutate, isLoading: isLoadingExercise } =
     trpc.proxy.exercise.create.useMutation();
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
   if (isLoadingWorkout || !data?.workout) {
     return <div>Loading...</div>;
@@ -26,10 +33,11 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const { name, sets, reps } = e.target as typeof e.target & {
+    const { name, sets, reps, weight } = e.target as typeof e.target & {
       name: { value: string };
       sets: { value: number };
       reps: { value: number };
+      weight: { value: number };
     };
 
     mutate(
@@ -38,6 +46,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         name: name.value,
         sets: +sets.value,
         reps: +reps.value,
+        weight: +weight.value,
       },
       {
         onSuccess: (data) => {
@@ -99,6 +108,17 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
             type={"number"}
             min={1}
             max={100}
+            required
+          />
+        </div>
+        <div className="flex flex-col gap-2 items-center">
+          <label htmlFor="reps">Weight:</label>
+          <input
+            className="p-1 rounded-sm text-orange-600 w-16"
+            name="weight"
+            type={"number"}
+            min={1}
+            max={500}
             required
           />
         </div>

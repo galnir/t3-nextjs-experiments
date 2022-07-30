@@ -72,7 +72,7 @@ export const workoutsRouter = t.router({
       };
     }),
 
-  getById: authedProcedure
+  getById: t.procedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const workout = await ctx.prisma.workout.findUnique({

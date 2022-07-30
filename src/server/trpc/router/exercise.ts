@@ -11,10 +11,11 @@ export const exerciseRouter = t.router({
         name: z.string(),
         sets: z.number().min(1).max(100),
         reps: z.number().min(1).max(100),
+        weight: z.number().min(1).max(500),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { workoutId, name, sets, reps } = input;
+      const { workoutId, name, sets, reps, weight } = input;
 
       const exercise = await prisma?.exercise.create({
         data: {
@@ -22,6 +23,7 @@ export const exerciseRouter = t.router({
           name,
           sets,
           reps,
+          weight,
         },
       });
 
@@ -55,6 +57,7 @@ export const exerciseRouter = t.router({
         name: z.string().nullable(),
         sets: z.number().min(1).max(100).nullable(),
         reps: z.number().min(1).max(100).nullable(),
+        weight: z.number().min(1).max(500).nullable(),
       })
     )
     .mutation(async ({ ctx, input }) => {

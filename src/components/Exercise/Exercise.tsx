@@ -7,6 +7,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
   const [name, setName] = useState(exercise.name);
   const [sets, setSets] = useState(exercise.sets);
   const [reps, setReps] = useState(exercise.reps);
+  const [weight, setWeight] = useState(exercise.weight);
   const [edit, setEdit] = useState(false);
 
   const { mutate: editExercise, isLoading: isLoadingEdit } =
@@ -24,6 +25,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
           name,
           sets,
           reps,
+          weight,
         },
         {
           onSuccess: () => {
@@ -61,29 +63,54 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
         className="flex gap-2 text-gray-700"
       >
         <div className="flex gap-2">
-          <input
-            className="px-1 disabled:bg-red-400 border-none"
-            placeholder="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            disabled={!edit}
-          />
-          <input
-            className="px-1 disabled:bg-red-400 border-none"
-            placeholder="sets"
-            type={"number"}
-            value={sets}
-            onChange={(e) => setSets(+e.target.value)}
-            disabled={!edit}
-          />
-          <input
-            className="px-1 disabled:bg-red-400 border-none"
-            placeholder="reps"
-            type={"number"}
-            value={reps}
-            onChange={(e) => setReps(+e.target.value)}
-            disabled={!edit}
-          />
+          <div>
+            <input
+              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              placeholder="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              disabled={!edit}
+            />
+          </div>
+          <div className="relative">
+            <input
+              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              placeholder="sets"
+              type={"number"}
+              value={sets}
+              onChange={(e) => setSets(+e.target.value)}
+              disabled={!edit}
+            />
+            <div className={`absolute left-1/4 top-1 ${edit ? "hidden" : ""}`}>
+              sets
+            </div>
+          </div>
+          <div className="relative">
+            <input
+              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              placeholder="reps"
+              type={"number"}
+              value={reps}
+              onChange={(e) => setReps(+e.target.value)}
+              disabled={!edit}
+            />
+            <div className={`absolute left-1/4 top-1 ${edit ? "hidden" : ""}`}>
+              reps
+            </div>
+          </div>
+          <div className="relative">
+            <input
+              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              placeholder="weight"
+              type={"number"}
+              value={weight}
+              onChange={(e) => setWeight(+e.target.value)}
+              disabled={!edit}
+            />
+            <div className={`absolute left-1/4 top-1 ${edit ? "hidden" : ""}`}>
+              kg
+            </div>
+          </div>
         </div>
 
         <button
