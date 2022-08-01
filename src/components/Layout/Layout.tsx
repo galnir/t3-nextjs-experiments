@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Head>
       <div className="container w-screen h-screen px-4 py-2">
         <Header />
-        <main className="mx-auto">{children}</main>
+        <main className="p-0 sm:mx-auto">{children}</main>
       </div>
     </>
   );

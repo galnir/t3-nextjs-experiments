@@ -68,7 +68,7 @@ const NewExerciseForm = (props: Props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
       <div className="flex gap-2 items-center">
         <label htmlFor="name">Workout Name</label>
         <input
@@ -111,7 +111,7 @@ const NewExerciseForm = (props: Props) => {
           </select>
         </div>
       )}
-      <button className="block p-1 px-2 bg-orange-500 rounded-sm hover:bg-orange-400">
+      <button className="w-full block p-1 px-2 bg-orange-500 rounded-sm hover:bg-orange-400">
         {isLoading ? "Creating..." : "Create"}
       </button>
     </form>
@@ -120,7 +120,7 @@ const NewExerciseForm = (props: Props) => {
 
 const CreateExercisePage: NextPage<Props> = (props: Props) => {
   return (
-    <div className="container p-10">
+    <div className="py-20 sm:p-10">
       <NewExerciseForm session={props.session} />
     </div>
   );
