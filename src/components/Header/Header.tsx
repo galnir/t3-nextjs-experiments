@@ -5,10 +5,10 @@ export default function Header() {
   const { data: session } = useSession();
 
   return (
-    <header className="w-full flex justify-between items-center">
-      <div className="font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-red-300 to-orange-600">
+    <header className="w-full flex justify-between items-center pr-1 sm:p-0">
+      <div className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-600 sm:text-6xl">
         <Link href="/">
-          <a className="block w-fit">
+          <a className="block">
             <p>Workout Planner</p>
           </a>
         </Link>
@@ -16,23 +16,23 @@ export default function Header() {
       <div className="flex justify-between">
         <div>
           {session ? (
-            <div className="flex gap-4 text-white">
+            <div className="flex gap-3 text-white sm:gap-4">
               <p className="text-red-400">Hi {session.user?.name}</p>
-              <span>-</span>
-              <div className="px-2 py-1 w-fit rounded-sm bg-green-600 -mt-1 hover:bg-green-500">
+              <span className="hidden md:inline">-</span>
+              <div className="grow flex justify-center px-1 py-1 w-fit rounded-sm bg-green-600 -mt-1 hover:bg-green-500">
                 <Link href="/workout/create">
-                  <a>Create Workout</a>
+                  <a className="block">Create Workout</a>
                 </Link>
               </div>
-              <span>-</span>
-              <div className="px-2 py-1 w-fit rounded-sm bg-red-700 -mt-1 hover:bg-red-600">
+              <span className="hidden md:inline">-</span>
+              <div className="grow py-1 px-2 basis-5 rounded-sm bg-red-700 -mt-1 hover:bg-red-600 sm:px-2 sm:py-1 sm:w-fit">
                 <Link href="api/auth/signout">
-                  <a>Sign Out</a>
+                  <a className="block">Sign Out</a>
                 </Link>
               </div>
             </div>
           ) : (
-            <div className="p-2 rounded-md bg-amber-600 hover:bg-amber-500">
+            <div className="grow p-2 rounded-md bg-amber-600 hover:bg-amber-500">
               <Link href="/api/auth/signin">
                 <a className="block">Sign In</a>
               </Link>
