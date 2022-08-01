@@ -63,51 +63,63 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
         className="flex gap-2 text-gray-700"
       >
         <div className="flex gap-2">
-          <div>
+          <div className="basis-24 sm:basis-full">
             <input
-              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
               placeholder="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               disabled={!edit}
             />
           </div>
-          <div className="relative">
+          <div className="relative basis-20 sm:basis-full">
             <input
-              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
               placeholder="sets"
               type={"number"}
               value={sets}
               onChange={(e) => setSets(+e.target.value)}
               disabled={!edit}
             />
-            <div className={`absolute left-1/4 top-1 ${edit ? "hidden" : ""}`}>
+            <div
+              className={`absolute left-1/2 sm:left-1/4 top-1 ${
+                edit ? "hidden" : ""
+              }`}
+            >
               sets
             </div>
           </div>
-          <div className="relative">
+          <div className="relative basis-20 sm:basis-full">
             <input
-              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
               placeholder="reps"
               type={"number"}
               value={reps}
               onChange={(e) => setReps(+e.target.value)}
               disabled={!edit}
             />
-            <div className={`absolute left-1/4 top-1 ${edit ? "hidden" : ""}`}>
+            <div
+              className={`absolute left-1/2 sm:left-1/4 top-1 ${
+                edit ? "hidden" : ""
+              }`}
+            >
               reps
             </div>
           </div>
-          <div className="relative">
+          <div className="relative basis-20 sm:basis-full">
             <input
-              className="relative px-1 h-full disabled:bg-red-400 border-none"
+              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
               placeholder="weight"
               type={"number"}
               value={weight}
               onChange={(e) => setWeight(+e.target.value)}
               disabled={!edit}
             />
-            <div className={`absolute left-1/4 top-1 ${edit ? "hidden" : ""}`}>
+            <div
+              className={`absolute left-1/2 sm:left-1/4 top-1 ${
+                edit ? "hidden" : ""
+              }`}
+            >
               kg
             </div>
           </div>

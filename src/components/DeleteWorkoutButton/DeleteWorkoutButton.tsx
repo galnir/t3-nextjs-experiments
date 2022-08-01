@@ -25,7 +25,7 @@ const DeleteWorkoutButton: React.FC<{ id: string; userId: string }> = ({
   return (
     <div>
       <button
-        className="block p-1 px-2 rounded-sm bg-red-600 text-white"
+        className="block rounded-sm bg-red-600 text-white sm:p-1 sm:px-2"
         onClick={handleDelete}
         disabled={isLoading}
       >

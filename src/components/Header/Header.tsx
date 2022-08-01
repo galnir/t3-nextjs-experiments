@@ -25,7 +25,7 @@ export default function Header() {
                 </Link>
               </div>
               <span className="hidden md:inline">-</span>
-              <div className="grow py-1 px-2 basis-5 rounded-sm bg-red-700 -mt-1 hover:bg-red-600 sm:px-2 sm:py-1 sm:w-fit">
+              <div className="grow py-1 px-3 basis-5 rounded-sm bg-red-700 -mt-1 hover:bg-red-600 sm:px-2 sm:py-1 sm:w-fit">
                 <Link href="api/auth/signout">
                   <a className="block">Sign Out</a>
                 </Link>

@@ -61,10 +61,14 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
   }
 
   return (
-    <div className="mx-auto w-4/6 py-16 flex flex-col justify-center items-center gap-10">
+    <div className="mx-auto w-full py-16 flex flex-col justify-center items-center gap-10 sm:w-4/6">
       <div className="flex gap-4 pb-2 border-b-2 w-5/6 justify-center">
-        <h1 className="w-fit text-5xl text-rose-600">{data?.workout.name}</h1>
-        <h4 className="self-end">by {data.workout.user.name}</h4>
+        <h1 className="w-fit text-2xl text-rose-600 sm:text-5xl">
+          {data?.workout.name}
+        </h1>
+        <h4 className="self-end text-sm sm:text-base">
+          by {data.workout.user.name}
+        </h4>
         {data.workout.user.id === session?.user?.id && (
           <div className="self-end flex gap-2">
             <DeleteWorkoutButton
@@ -78,7 +82,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
 
       <form
         onSubmit={handleSubmit}
-        className="-ml-5 py-3 flex gap-5 justify-center items-end w-5/6"
+        className="w-full sm:-ml-5 sm:py-3 flex gap-4 sm:gap-5 sm:justify-center items-end sm:w-5/6"
         ref={formRef}
       >
         <div className="flex flex-col gap-2 items-center">
