@@ -1,4 +1,3 @@
-import { Workout } from "@prisma/client";
 import { useRouter } from "next/router";
 import { trpc } from "../../utils/trpc";
 
