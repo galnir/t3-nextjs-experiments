@@ -99,13 +99,26 @@ export const exerciseRouter = t.router({
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const { id } = input;
-      const exercise = await prisma?.exercise.findUnique({
+      const exercise = await ctx.prisma.exercise.findUnique({
         where: {
           id,
         },
       });
       return {
         exercise,
+      };
+    }),
+  deleteAll: authedProcedure
+    .input(z.object({ workoutId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { workoutId } = input;
+      const exercises = await ctx.prisma.exercise.deleteMany({
+        where: {
+          workoutId,
+        },
+      });
+      return {
+        exercises,
       };
     }),
 });

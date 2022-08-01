@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
+import DeleteExercisesButton from "../../components/DeleteExercisesButton";
 import DeleteWorkoutButton from "../../components/DeleteWorkoutButton";
 import Exercise from "../../components/Exercise";
 import { trpc } from "../../utils/trpc";
@@ -65,11 +66,12 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         <h1 className="w-fit text-5xl text-rose-600">{data?.workout.name}</h1>
         <h4 className="self-end">by {data.workout.user.name}</h4>
         {data.workout.user.id === session?.user?.id && (
-          <div className="self-end">
+          <div className="self-end flex gap-2">
             <DeleteWorkoutButton
               id={data.workout.id}
               userId={data.workout.user.id}
             />
+            <DeleteExercisesButton workoutId={data.workout.id} />
           </div>
         )}
       </div>
