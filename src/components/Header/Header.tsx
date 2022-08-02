@@ -19,13 +19,13 @@ export default function Header() {
             <div className="flex gap-3 text-white sm:gap-4">
               <p className="text-red-400">Hi {session.user?.name}</p>
               <span className="hidden md:inline">-</span>
-              <div className="grow flex justify-center px-1 py-1 w-fit rounded-sm bg-green-600 -mt-1 hover:bg-green-500">
+              <div className="grow flex justify-center px-3 py-1 w-fit rounded-sm bg-green-600 -mt-1 hover:bg-green-500">
                 <Link href="/workout/create">
                   <a className="block">Create Workout</a>
                 </Link>
               </div>
               <span className="hidden md:inline">-</span>
-              <div className="grow py-1 px-3 basis-5 rounded-sm bg-red-700 -mt-1 hover:bg-red-600 sm:px-2 sm:py-1 sm:w-fit">
+              <div className="grow flex justify-center py-1 px-3 rounded-sm bg-red-700 -mt-1 hover:bg-red-600 sm:px-2 sm:py-1">
                 <Link href="api/auth/signout">
                   <a className="block">Sign Out</a>
                 </Link>

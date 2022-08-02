@@ -111,7 +111,7 @@ const NewExerciseForm = (props: Props) => {
           </select>
         </div>
       )}
-      <button className="w-full block p-1 px-2 bg-orange-500 rounded-sm hover:bg-orange-400">
+      <button className="w-full block p-1 px-2 bg-orange-500 rounded-sm hover:bg-orange-400 sm:w-fit">
         {isLoading ? "Creating..." : "Create"}
       </button>
     </form>
