@@ -5,12 +5,15 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import { trpc } from "../utils/trpc";
 import Layout from "../components/Layout";
 import ErrorBoundary from "../components/ErrorBoundary";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <SessionProvider session={pageProps.session}>
       <Layout>
         <ErrorBoundary>
+          <ToastContainer theme={"light"} toastClassName="p-4" />
           <Component {...pageProps} />
         </ErrorBoundary>
       </Layout>

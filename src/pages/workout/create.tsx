@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { getServerSession } from "../../shared/get-server-session";
 import { trpc } from "../../utils/trpc";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
   session: Session;
@@ -61,6 +63,17 @@ const NewExerciseForm = (props: Props) => {
         onSuccess: (data) => {
           console.log("in sucess");
           if (!data.workout) return;
+
+          toast("Workout created!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          });
+
           router.push(`/workout/${data.workout.id}`);
         },
       }
