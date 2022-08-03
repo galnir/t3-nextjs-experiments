@@ -63,9 +63,9 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
         className="flex gap-2 text-gray-700"
       >
         <div className="flex gap-2 p-1">
-          <div className="basis-24 sm:basis-full">
+          <div>
             <input
-              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
+              className="w-full px-1 h-full disabled:bg-red-400"
               placeholder="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -74,7 +74,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
           </div>
           <div className="flex gap-2 justify-center items-center border p-1">
             <input
-              className="w-12 px-1 h-full border-none overflow-auto text-left disabled:bg-red-400"
+              className="w-14 px-1 border-none overflow-auto text-left disabled:bg-red-400"
               placeholder="sets"
               type={"number"}
               value={sets}
@@ -85,7 +85,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
           </div>
           <div className="flex gap-2 justify-center items-center border p-1">
             <input
-              className="w-12 px-1 h-full border-none overflow-auto text-left disabled:bg-red-400"
+              className="w-14 px-1 border-none overflow-auto text-left disabled:bg-red-400"
               placeholder="reps"
               type={"number"}
               value={reps}
@@ -96,7 +96,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
           </div>
           <div className="flex gap-1 justify-center items-center border p-1">
             <input
-              className="w-12 px-1 h-full border-none overflow-auto text-left disabled:bg-red-400"
+              className="w-14 px-1 border-none overflow-auto text-left disabled:bg-red-400"
               placeholder="weight"
               type={"number"}
               value={weight}
@@ -110,13 +110,13 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
         <button
           onClick={handleEdit}
           disabled={isLoadingEdit}
-          className="block p-1 px-2 w-16 bg-orange-500 rounded-sm hover:bg-orange-400"
+          className="block px-2 w-16 bg-orange-500 rounded-sm hover:bg-orange-400"
         >
           {edit ? (isLoadingEdit ? "Saving" : "Save") : "Edit"}
         </button>
         <button
           onClick={handleDelete}
-          className="block p-1 px-2 rounded-sm bg-red-600 text-white"
+          className="block px-2 rounded-sm bg-red-600 text-white"
           disabled={isLoadingDelete}
         >
           {isLoadingDelete ? "Deleting..." : "Delete"}
