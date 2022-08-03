@@ -62,7 +62,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
         exit={{ opacity: 0 }}
         className="flex gap-2 text-gray-700"
       >
-        <div className="flex gap-2">
+        <div className="flex gap-2 p-1">
           <div className="basis-24 sm:basis-full">
             <input
               className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
@@ -72,56 +72,38 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
               disabled={!edit}
             />
           </div>
-          <div className="relative basis-20 sm:basis-full">
+          <div className="flex gap-2 justify-center items-center border p-1">
             <input
-              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
+              className="w-12 px-1 h-full border-none overflow-auto text-left disabled:bg-red-400"
               placeholder="sets"
               type={"number"}
               value={sets}
               onChange={(e) => setSets(+e.target.value)}
               disabled={!edit}
             />
-            <div
-              className={`absolute left-1/2 sm:left-1/4 top-1 ${
-                edit ? "hidden" : ""
-              }`}
-            >
-              sets
-            </div>
+            <p className="text-red-400">sets</p>
           </div>
-          <div className="relative basis-20 sm:basis-full">
+          <div className="flex gap-2 justify-center items-center border p-1">
             <input
-              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
+              className="w-12 px-1 h-full border-none overflow-auto text-left disabled:bg-red-400"
               placeholder="reps"
               type={"number"}
               value={reps}
               onChange={(e) => setReps(+e.target.value)}
               disabled={!edit}
             />
-            <div
-              className={`absolute left-1/2 sm:left-1/4 top-1 ${
-                edit ? "hidden" : ""
-              }`}
-            >
-              reps
-            </div>
+            <p className="text-red-400">reps</p>
           </div>
-          <div className="relative basis-20 sm:basis-full">
+          <div className="flex gap-1 justify-center items-center border p-1">
             <input
-              className="relative block w-full px-1 h-full disabled:bg-red-400 border-none"
+              className="w-12 px-1 h-full border-none overflow-auto text-left disabled:bg-red-400"
               placeholder="weight"
               type={"number"}
               value={weight}
               onChange={(e) => setWeight(+e.target.value)}
               disabled={!edit}
             />
-            <div
-              className={`absolute left-1/2 sm:left-1/4 top-1 ${
-                edit ? "hidden" : ""
-              }`}
-            >
-              kg
-            </div>
+            <p className="text-red-400">kg</p>
           </div>
         </div>
 

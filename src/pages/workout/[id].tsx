@@ -118,9 +118,9 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
           />
         </div>
         <div className="flex flex-col gap-2 items-center">
-          <label htmlFor="reps">Weight:</label>
+          <label htmlFor="reps">Weight(kg):</label>
           <input
-            className="p-1 rounded-sm text-orange-600 w-16"
+            className="p-1 rounded-sm text-orange-600 w-20"
             name="weight"
             type={"number"}
             min={1}
