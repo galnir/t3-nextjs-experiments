@@ -8,6 +8,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
   const [sets, setSets] = useState(exercise.sets);
   const [reps, setReps] = useState(exercise.reps);
   const [weight, setWeight] = useState(exercise.weight);
+  const [rest, setRest] = useState(exercise.rest);
   const [edit, setEdit] = useState(false);
 
   const { mutate: editExercise, isLoading: isLoadingEdit } =
@@ -104,6 +105,17 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
               disabled={!edit}
             />
             <p className="text-red-400">kg</p>
+          </div>
+          <div className="flex gap-1 justify-center items-center border p-1">
+            <input
+              className="w-14 px-1 border-none overflow-auto text-left disabled:bg-red-400"
+              placeholder="weight"
+              type={"number"}
+              value={rest}
+              onChange={(e) => setRest(+e.target.value)}
+              disabled={!edit}
+            />
+            <p className="text-red-400">sec</p>
           </div>
         </div>
 

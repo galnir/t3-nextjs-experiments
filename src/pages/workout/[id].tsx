@@ -34,11 +34,12 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const { name, sets, reps, weight } = e.target as typeof e.target & {
+    const { name, sets, reps, weight, rest } = e.target as typeof e.target & {
       name: { value: string };
       sets: { value: number };
       reps: { value: number };
       weight: { value: number };
+      rest: { value: number };
     };
 
     mutate(
@@ -48,6 +49,7 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
         sets: +sets.value,
         reps: +reps.value,
         weight: +weight.value,
+        rest: +rest.value,
       },
       {
         onSuccess: (data) => {
@@ -122,6 +124,17 @@ const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
           <input
             className="p-1 rounded-sm text-orange-600 w-20"
             name="weight"
+            type={"number"}
+            min={1}
+            max={500}
+            required
+          />
+        </div>
+        <div className="flex flex-col gap-2 items-center">
+          <label htmlFor="reps">Rest(sec):</label>
+          <input
+            className="p-1 rounded-sm text-orange-600 w-20"
+            name="rest"
             type={"number"}
             min={1}
             max={500}
