@@ -1,15 +1,16 @@
-import type { NextPage } from "next";
+import type { GetServerSidePropsContext, NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useRef } from "react";
 import DeleteExercisesButton from "../../components/DeleteExercisesButton";
 import DeleteWorkoutButton from "../../components/DeleteWorkoutButton";
 import Exercise from "../../components/Exercise";
+import { getServerSession } from "../../shared/get-server-session";
 import { trpc } from "../../utils/trpc";
 
 const WorkoutContent: React.FC<{ id: string }> = ({ id }) => {
-  const utils = trpc.useContext();
   const { data: session } = useSession();
+  const utils = trpc.useContext();
   const formRef = useRef<HTMLFormElement>(null);
 
   const {
@@ -169,5 +170,13 @@ const WorkoutPage: NextPage = () => {
 
   return <WorkoutContent id={id} />;
 };
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return {
+    props: {
+      session: await getServerSession(context),
+    },
+  };
+}
 
 export default WorkoutPage;

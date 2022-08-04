@@ -8,9 +8,12 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+const MyApp: AppType = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={session}>
       <Layout>
         <ErrorBoundary>
           <ToastContainer theme={"light"} toastClassName="p-4" />
