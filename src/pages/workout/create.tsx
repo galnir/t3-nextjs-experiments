@@ -36,6 +36,7 @@ const NewExerciseForm = (props: Props) => {
       name: string;
       sets: number;
       reps: number;
+      rest: number;
       weight: number;
     }[] = [];
     if (premadeWorkout) {
@@ -48,6 +49,7 @@ const NewExerciseForm = (props: Props) => {
           sets: exercise.sets,
           reps: exercise.reps,
           weight: exercise.weight,
+          rest: exercise.rest,
         });
       });
     }
