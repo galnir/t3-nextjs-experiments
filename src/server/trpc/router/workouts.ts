@@ -18,6 +18,7 @@ export const workoutsRouter = t.router({
               sets: z.number().min(1).max(100),
               reps: z.number().min(1).max(100),
               weight: z.number().min(1).max(500),
+              rest: z.number().min(1).max(500),
             })
           )
           .nullable(),
@@ -40,6 +41,7 @@ export const workoutsRouter = t.router({
           sets: number;
           reps: number;
           weight: number;
+          rest: number;
           workoutId: string;
         }[] = [];
         premadeExercises.forEach((exercise) => {
