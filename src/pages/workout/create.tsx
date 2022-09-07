@@ -6,6 +6,7 @@ import { getServerSession } from "../../shared/get-server-session";
 import { trpc } from "../../utils/trpc";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSession } from "next-auth/react";
 
 type Props = {
   session: Session;
@@ -14,8 +15,10 @@ type Props = {
 const NewExerciseForm = (props: Props) => {
   const router = useRouter();
 
+  const { data: session } = useSession();
+
   const { data, isLoading: isLoadingData } = trpc.proxy.workout.getAll.useQuery(
-    { userId: props.session.user?.id as string }
+    { userId: session?.user?.id as string }
   );
 
   const { mutate, isLoading } = trpc.proxy.workout.create.useMutation();
@@ -56,7 +59,7 @@ const NewExerciseForm = (props: Props) => {
 
     mutate(
       {
-        userId: props.session.user?.id as string,
+        userId: session?.user?.id as string,
         name: name.value,
         description: description.value,
         premadeExercises: exercises,

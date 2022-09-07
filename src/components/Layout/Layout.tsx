@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <title>T3 App</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="container w-screen h-screen px-4 py-2">
+      <div className="container w-screen h-screen px-4 py-2 font-sans">
         <Header />
         <main className="p-0 sm:mx-auto">{children}</main>
       </div>
